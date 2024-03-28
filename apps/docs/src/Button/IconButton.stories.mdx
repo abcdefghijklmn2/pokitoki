@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgsTable, Title,  Controls, Meta, Story, Canvas } from '@storybook/addon-docs';
 import { IconButton } from '@custompackages/designsystem';
 import TestIcon from './TestIcon.tsx'
 
@@ -9,11 +9,12 @@ import TestIcon from './TestIcon.tsx'
         
       }}
       args={{
-        
+        variant: 'primary',
+        size : 'medium'
       }}
 />
 
-# IconButton
+<Title />
 
 `IconButton` 컴포넌트는 화면 크기에 따라 레이아웃을 조정하여 
 모든 디바이스에서 최적의 뷰잉 경험을 제공합니다. 
@@ -21,11 +22,6 @@ import TestIcon from './TestIcon.tsx'
 최대 width는 768px이며, 넘어가게 되면 자동으로 양옆으로 확장됩니다.
 
 `className` prop을 통한 사용자 정의 스타일링을 지원합니다.
-
-## Props
-
-<ArgsTable of={IconButton} />
-
 
 ## Basic Usage
 
@@ -39,4 +35,9 @@ breakpoint: width - 768px
   </Story>
 </Canvas>
 
- 
+## Props
+
+<Controls />
+
+
+
