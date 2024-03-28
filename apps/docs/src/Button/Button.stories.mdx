@@ -39,5 +39,21 @@ breakpoint: width - 768px
 
 <Controls />
 
+## Button With Left Icon
+ 
+<Canvas>
+  <Story name="ButtonWithLeftIcon" args={{ children: 'text', LeftIcon: <TestIcon/> }}>
+    {args => <Button {...args} />}
+  </Story>
+</Canvas>
+
+
+## Button With Right Icon
+ 
+<Canvas>
+  <Story name="ButtonWithRightIcon" args={{ children: 'text', RightIcon: <TestIcon/> }}>
+    {args => <Button {...args} />}
+  </Story>
+</Canvas>
 
 
