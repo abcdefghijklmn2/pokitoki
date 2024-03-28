@@ -1,35 +1,33 @@
-import { Slot } from '@radix-ui/react-slot'
-import { FC, forwardRef } from 'react'
+import { forwardRef } from 'react'
 
+import { cn } from '../utils'
 import RawButton from './components/RawButton'
-import { LeftButtonIconVariants, RightButtonIconVariants } from './style'
+import { buttonVariants, LeftButtonIconVariants, rawButtonVariants, RightButtonIconVariants } from './style'
 import { ButtonProps } from './type'
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, LeftIcon, RightIcon, ...props }, ref) => {
-  const { size } = props
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, className, LeftIcon, RightIcon, ...props }, ref) => {
+    const { size } = props
 
-  return (
-    <RawButton ref={ref} {...props}>
-      <>
-        {LeftIcon && (
-          <>
-            <div className={LeftButtonIconVariants({ size })} role="none presentation" aria-hidden="true">
+    return (
+      <RawButton className={cn(rawButtonVariants({ size }), buttonVariants({ size }), className)} ref={ref} {...props}>
+        <>
+          {LeftIcon && (
+            <span className={LeftButtonIconVariants({ size })} role="none presentation" aria-hidden="true">
               {LeftIcon}
-            </div>
-          </>
-        )}
+            </span>
+          )}
 
-        {children}
+          {children}
 
-        {RightIcon && (
-          <>
-            <div className={RightButtonIconVariants({ size })} role="none presentation" aria-hidden="true">
+          {RightIcon && (
+            <span className={RightButtonIconVariants({ size })} role="none presentation" aria-hidden="true">
               {RightIcon}
-            </div>
-          </>
-        )}
-      </>
-    </RawButton>
-  )
-})
+            </span>
+          )}
+        </>
+      </RawButton>
+    )
+  },
+)
 export default Button
