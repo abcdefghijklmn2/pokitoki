@@ -4,16 +4,37 @@ import { ButtonHTMLAttributes, ReactElement, ReactNode, RefAttributes } from 're
 
 import { rawButtonVariants } from './style'
 
+/**
+ * Defines the basic HTML button element attributes for further extension.
+ */
 export type ButtonElement = ButtonHTMLAttributes<HTMLButtonElement>
 
+/**
+ * Describes the properties for the base button component, extending standard HTML button attributes
+ * and variant props for styling. Includes properties for variant selection and size, as well as an
+ * option to render the button as a child component without wrapper elements.
+ */
 export interface RawButtonProps extends ButtonElement, VariantProps<typeof rawButtonVariants> {
+  /** Defines the button's style variant, currently supporting only 'primary'
+   * @default primary
+   */
   variant: 'primary'
 
+  /** Determines the size of the button, with options including 'medium', 'large', or 'small'.
+   * @default 'medium'
+   */
   size: 'medium' | 'large' | 'small'
 
+  /** Allows the button to be rendered as a child component, omitting wrapper elements if true.
+   * @default false
+   */
   asChild?: boolean
 }
 
+/**
+ * Extends `RawButtonProps` to include optional properties for adding icons to the button.
+ * Icons can be positioned on either the left or right side of the button's content.
+ */
 export interface ButtonProps extends RawButtonProps {
   /**
    * Optional. A React node for an icon to display on the left side of the button's content.
@@ -26,6 +47,11 @@ export interface ButtonProps extends RawButtonProps {
   RightIcon?: ReactNode
 }
 
+/**
+ * Describes the properties for an icon button component, which is a specialization of the
+ * raw button that expects a single React element (typically an icon) as its child.
+ */
 export interface IconButtonProps extends RawButtonProps {
+  /** The single child element, typically an icon, to be displayed inside the button. */
   children: ReactElement
 }

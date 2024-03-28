@@ -25,10 +25,8 @@ export const buttonVariants = cva('', {
       large: 'h-10 py-2 px-spacing-4',
       small: 'h-6 py-[0.1875rem] px-spacing-2',
     },
-    // 여기에 다른 변형을 추가할 수 있습니다.
   },
   defaultVariants: {
-    // 기본 변형 설정
     size: 'medium',
   },
 })
@@ -40,7 +38,6 @@ export const iconButtonVariants = cva('', {
       large: 'p-2',
       small: 'p-[0.125rem]',
     },
-    // 여기에 다른 변형을 추가할 수 있습니다.
   },
   defaultVariants: {
     size: 'medium',

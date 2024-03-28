@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgsTable, Title,  Controls, Meta, Story, Canvas } from '@storybook/addon-docs';
 import { IconButton, Button } from '@custompackages/designsystem';
 import TestIcon from './TestIcon.tsx'
 
@@ -14,7 +14,7 @@ import TestIcon from './TestIcon.tsx'
       }}
 />
 
-# Button
+<Title />
 
 `Button` 컴포넌트는 화면 크기에 따라 레이아웃을 조정하여 
 모든 디바이스에서 최적의 뷰잉 경험을 제공합니다. 
@@ -37,6 +37,7 @@ breakpoint: width - 768px
 
 ## Props
 
-<ArgsTable of={Button} />
+<Controls />
+
 
 
