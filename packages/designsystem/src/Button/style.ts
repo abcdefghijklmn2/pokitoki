@@ -1,15 +1,15 @@
 import { cva } from 'class-variance-authority'
 
-const buttonVariants = cva(`rounded-[6px] inline-flex justify-center items-center`, {
+export const rawButtonVariants = cva(`rounded-[6px] inline-flex justify-center items-center`, {
   variants: {
     variant: {
-      primary: ` bg-primary-01-default`,
+      primary: ` bg-primary-01-default text-text-white`,
     },
 
     size: {
-      medium: 'px-spacing-3 gap-1 body-02-r text-text-white',
-      large: 'px-spacing-3 gap-0.5',
-      small: 'px-spacing-3 gap-1',
+      medium: 'gap-1 body-02-r',
+      large: 'gap-0.5 body-03-r',
+      small: 'gap-1 body-01-r',
     },
   },
   defaultVariants: {
@@ -18,12 +18,41 @@ const buttonVariants = cva(`rounded-[6px] inline-flex justify-center items-cente
   },
 })
 
+export const buttonVariants = cva('', {
+  variants: {
+    size: {
+      medium: 'h-[1.875rem] py-[0.3125rem] px-spacing-3',
+      large: 'h-10 py-2 px-spacing-4',
+      small: 'h-6 py-[0.1875rem] px-spacing-2',
+    },
+    // 여기에 다른 변형을 추가할 수 있습니다.
+  },
+  defaultVariants: {
+    // 기본 변형 설정
+    size: 'medium',
+  },
+})
+
+export const iconButtonVariants = cva('', {
+  variants: {
+    size: {
+      medium: 'p-[0.375rem]',
+      large: 'p-2',
+      small: 'p-[0.125rem]',
+    },
+    // 여기에 다른 변형을 추가할 수 있습니다.
+  },
+  defaultVariants: {
+    size: 'medium',
+  },
+})
+
 export const LeftButtonIconVariants = cva(``, {
   variants: {
     size: {
-      medium: 'w-spacing-5 h-spacing-5',
-      large: 'w-6 h-6',
-      small: 'w-spacing-5 h-spacing-5',
+      medium: '[&>svg]:w-spacing-5 [&>svg]:h-spacing-5',
+      large: '[&>svg]:w-6 [&>svg]:h-6',
+      small: '[&>svg]:w-spacing-5 [&>svg]:h-spacing-5',
     },
   },
   defaultVariants: {
@@ -34,14 +63,12 @@ export const LeftButtonIconVariants = cva(``, {
 export const RightButtonIconVariants = cva(``, {
   variants: {
     size: {
-      medium: 'w-spacing-3 h-spacing-3',
-      large: 'w-4 h-4',
-      small: 'w-spacing-3 h-spacing-3',
+      medium: '[&>svg]:w-spacing-3 [&>svg]:h-spacing-3',
+      large: '[&>svg]:w-4 h-4',
+      small: '[&>svg]:w-spacing-3 [&>svg]:h-spacing-3',
     },
   },
   defaultVariants: {
     size: 'medium',
   },
 })
-
-export default buttonVariants

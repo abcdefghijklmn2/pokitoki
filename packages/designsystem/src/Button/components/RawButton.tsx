@@ -2,15 +2,14 @@
 import { Slot } from '@radix-ui/react-slot'
 import { forwardRef } from 'react'
 
-import { cn } from '../../utils'
-import buttonVariants from '../style'
 import { RawButtonProps } from '../type'
 
 const RawButton = forwardRef<HTMLButtonElement, RawButtonProps>(
-  ({ className, variant, asChild = false, children, ...props }, ref) => {
+  ({ variant, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
+
     return (
-      <Comp ref={ref} className={cn(buttonVariants({ variant }), className)} {...props}>
+      <Comp ref={ref} {...props}>
         {children}
       </Comp>
     )
