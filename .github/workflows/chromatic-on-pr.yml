@@ -43,7 +43,8 @@ jobs:
       - name: build repositories
         run: pnpm build --filter=\!web --filter=\!docs
 
-      - name: Run Chromatic
+      - name: Publish to Chromatic
+        id: chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
