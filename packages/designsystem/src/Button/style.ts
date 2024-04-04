@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 export const rawButtonVariants = cva(`rounded-[6px] inline-flex justify-center items-center`, {
   variants: {
     variant: {
-      primary: ` bg-primary-01-default text-text-white`,
+      primary: ` bg-primary-01-default text-text-white hover:bg-primary-01-hover active:bg-primary-01-press disabled:bg-background-extension-disabled-bg`,
     },
 
     size: {

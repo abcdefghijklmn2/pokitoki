@@ -29,6 +29,11 @@ export interface RawButtonProps extends ButtonElement, VariantProps<typeof rawBu
    * @default false
    */
   asChild?: boolean
+
+  /**
+   * @default false
+   */
+  disabled?: boolean
 }
 
 /**
