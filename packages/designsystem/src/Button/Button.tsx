@@ -10,10 +10,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const { size } = props
 
     return (
-      <RawButton className={cn(rawButtonVariants({ size }), buttonVariants({ size }), className)} ref={ref} {...props}>
+      <RawButton className={cn(rawButtonVariants(props), buttonVariants(props), className)} ref={ref} {...props}>
         <>
           {LeftIcon && (
-            <span className={LeftButtonIconVariants({ size })} role="none presentation" aria-hidden="true">
+            <span className={LeftButtonIconVariants(props)} role="none presentation" aria-hidden="true">
               {LeftIcon}
             </span>
           )}
@@ -21,7 +21,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           {children}
 
           {RightIcon && (
-            <span className={RightButtonIconVariants({ size })} role="none presentation" aria-hidden="true">
+            <span className={RightButtonIconVariants(props)} role="none presentation" aria-hidden="true">
               {RightIcon}
             </span>
           )}

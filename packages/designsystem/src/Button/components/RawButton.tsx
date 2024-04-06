@@ -8,6 +8,8 @@ const RawButton = forwardRef<HTMLButtonElement, RawButtonProps>(
   ({ variant, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
 
+    const a = 1
+
     return (
       <Comp ref={ref} {...props}>
         {children}
