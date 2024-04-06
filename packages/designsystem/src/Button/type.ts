@@ -15,15 +15,15 @@ export type ButtonElement = ButtonHTMLAttributes<HTMLButtonElement>
  * option to render the button as a child component without wrapper elements.
  */
 export interface RawButtonProps extends ButtonElement, VariantProps<typeof rawButtonVariants> {
-  /** Defines the button's style variant, currently supporting only 'primary'
+  /** Defines the button's style variant
    * @default primary
    */
-  variant: 'primary' | 'secondary'
+  variant: 'primary' | 'secondary' | 'custom'
 
-  /** Determines the size of the button, with options including 'medium', 'large', or 'small'.
+  /** Determines the size of the button, with options including 'medium', 'large', 'small' or 'custom'.
    * @default 'medium'
    */
-  size: 'medium' | 'large' | 'small'
+  size: 'medium' | 'large' | 'small' | 'custom'
 
   /** Allows the button to be rendered as a child component, omitting wrapper elements if true.
    * @default false

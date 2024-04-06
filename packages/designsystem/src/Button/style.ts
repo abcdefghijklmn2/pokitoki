@@ -10,12 +10,14 @@ export const rawButtonVariants = cva(`rounded-[4px] inline-flex justify-center i
       secondary: `bg-tertiary-default border border-solid border-border-01 text-text-01 hover:bg-tertiary-hover active:bg-tertiary-press 
       focus:border-2 focus:border-solid focus:border-border-selected
       disabled:bg-background-extension-disabled-bg disabled:border-border-disabled disabled:text-text-disabled`,
+      custom: '',
     },
 
     size: {
       medium: 'gap-spacing-1 body-02-r',
       large: 'gap-spacing-1 body-03-r',
       small: 'gap-spacing-1 body-01-r',
+      custom: '',
     },
   },
   defaultVariants: {
@@ -34,6 +36,7 @@ export const buttonVariants = cva('', {
       medium: 'h-9 px-spacing-3 py-spacing-2',
       large: 'h-10 px-spacing-4 py-spacing-3',
       small: 'h-6 px-spacing-2 py-spacing-1',
+      custom: '',
     },
   },
   defaultVariants: {
@@ -47,6 +50,7 @@ export const iconButtonVariants = cva('', {
       medium: 'p-spacing-2',
       large: 'p-spacing-2',
       small: 'p-spacing-1',
+      custom: '',
     },
   },
   defaultVariants: {
