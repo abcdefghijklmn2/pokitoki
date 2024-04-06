@@ -23,7 +23,7 @@ export interface RawButtonProps extends ButtonElement, VariantProps<typeof rawBu
   /** Determines the size of the button, with options including 'medium', 'large', 'small' or 'custom'.
    * @default 'medium'
    */
-  size: 'medium' | 'large' | 'small' | 'custom'
+  size: 'medium' | 'large' | 'small'
 
   /** Allows the button to be rendered as a child component, omitting wrapper elements if true.
    * @default false

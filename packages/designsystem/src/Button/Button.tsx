@@ -7,8 +7,6 @@ import { ButtonProps } from './type'
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, className, LeftIcon, RightIcon, ...props }, ref) => {
-    const { size } = props
-
     return (
       <RawButton className={cn(rawButtonVariants(props), buttonVariants(props), className)} ref={ref} {...props}>
         <>
