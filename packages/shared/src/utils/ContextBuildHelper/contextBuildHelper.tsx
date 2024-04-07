@@ -1,18 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, ReactNode, useContext, useMemo } from 'react'
 
-export interface ContextBuildHelperParams {
+export interface ContextBuildHelperParams<ContextValuesType extends object> {
   id: string
+
+  defaultContext: ContextValuesType | undefined
 }
 
-export const contextBuildHelper = ({ id }: ContextBuildHelperParams) => {
-  const Context = createContext(null)
+type ProviderProps<ContextValuesType> = (ContextValuesType & { children: ReactNode }) | { children: ReactNode }
 
-  const HelperProvider = ({ children, ...contextValue }: any) => {
+export const contextBuildHelper = <ContextValuesType extends object>({
+  id,
+
+  defaultContext,
+}: ContextBuildHelperParams<ContextValuesType>) => {
+  const Context = createContext<ContextValuesType | undefined>(defaultContext ?? undefined)
+
+  const HelperProvider = ({ children, ...contextValue }: ProviderProps<ContextValuesType>) => {
     const [contextJsonKey, contextJsonValue] = [Object.keys(contextValue), Object.values(contextValue)]
     const value = useMemo(() => {
-      return contextJsonKey.length > 0 ? contextValue : null
-    }, [...contextJsonValue])
+      return contextJsonKey.length > 0 ? contextValue : undefined
+    }, [...contextJsonValue]) as ContextValuesType
 
     return <Context.Provider value={value}>{children}</Context.Provider>
   }
@@ -20,9 +28,15 @@ export const contextBuildHelper = ({ id }: ContextBuildHelperParams) => {
   const useHelperContext = () => {
     const context = useContext(Context)
 
-    if (!context) throw new Error(`${id} context must be provided in provider`)
+    if (context != null) {
+      return context
+    }
 
-    return Context
+    if (defaultContext != null) {
+      return defaultContext
+    }
+
+    throw new Error(`${id} context must be provided in provider`)
   }
 
   return [HelperProvider, useHelperContext]
