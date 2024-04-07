@@ -1,17 +1,10 @@
 import { ArgsTable, Title,  Controls, Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Dialog, SmallDialog } from '@custompackages/designsystem';
+import { AlertDialog } from '@custompackages/designsystem';
 import AssembledDialogExample from './AssembledDialogExample'
 
-<Meta title="Example/Dialog"
-      component={Dialog}
+<Meta title="Example/AlertDialog"
+      component={AlertDialog}
       tags={['autodocs']} 
-      argTypes={{
-        
-      }}
-      args={{
-        variant: 'primary',
-        size : 'medium'
-      }}
 />
 
 <Title />
@@ -20,17 +13,17 @@ import AssembledDialogExample from './AssembledDialogExample'
 
 프로젝트에 @custompackages/designsystem이 설치되어 있는지 확인하세요. 
 
-다음과 같이 Dialog 컴포넌트를 임포트할 수 있습니다
+다음과 같이 AlertDialog 컴포넌트를 임포트할 수 있습니다
 
 ```jsx
-import { Dialog } from '@custompackages/designsystem';
+import { AlertDialog } from '@custompackages/designsystem';
 ```
 
 ## Basic Usage
 
 <Canvas>
-  <Story name="BasicDialog" args={{ children: 'text' }}>
-    {args => <Dialog {...args} />}
+  <Story name="BasicDialog" args={{ header: 'test' }}>
+    {args => <AlertDialog {...args} />}
   </Story>
 </Canvas>
 
@@ -43,3 +36,31 @@ import { Dialog } from '@custompackages/designsystem';
 
 <AssembledDialogExample />
  
+
+ 코드 예시
+
+ ```jsx
+
+ const AssembledDialogExample = () => {
+  const [isVisible, setVisible] = useState(false)
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          setVisible(true)
+        }}
+      >
+        click button !
+      </button>
+      <AlertDialog isVisible={isVisible} onChangeVisible={setVisible} header="example" onSubmit={async (e) => {}}>
+        <AlertDialog.Body>Test Body</AlertDialog.Body>
+      </AlertDialog>
+    </>
+  )
+}
+
+export default AssembledDialogExample
+
+ ```

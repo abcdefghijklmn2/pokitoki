@@ -1,4 +1,4 @@
-import { AssembledDialog } from '@custompackages/designsystem'
+import { AlertDialog } from '@custompackages/designsystem'
 import React, { useState } from 'react'
 import { noop } from 'shared'
 
@@ -15,9 +15,9 @@ const AssembledDialogExample = () => {
       >
         click button !
       </button>
-      <AssembledDialog isVisible={isVisible} onChangeVisible={setVisible} header="example" onSubmit={async (e) => {}}>
-        <AssembledDialog.Body>Test Body</AssembledDialog.Body>
-      </AssembledDialog>
+      <AlertDialog isVisible={isVisible} onChangeVisible={setVisible} header="example" onSubmit={async (e) => {}}>
+        <AlertDialog.Body>Test Body</AlertDialog.Body>
+      </AlertDialog>
     </>
   )
 }

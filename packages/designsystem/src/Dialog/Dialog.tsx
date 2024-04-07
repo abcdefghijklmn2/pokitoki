@@ -38,7 +38,7 @@ export interface AssembledDialogProps extends Omit<DialogTemplateProps, 'childre
   children: ReactNode
 }
 
-export const AssembledDialog = ({
+export const AlertDialog = ({
   isVisible,
   onChangeVisible,
   header,
@@ -62,6 +62,6 @@ export const AssembledDialog = ({
   )
 }
 
-AssembledDialog.Body = DialogBody
+AlertDialog.Body = DialogBody
 
-AssembledDialog.displayName = 'dialog'
+AlertDialog.displayName = 'dialog'
