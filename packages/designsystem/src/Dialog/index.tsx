@@ -1,1 +1,2 @@
-export * from './components/radix'
+export * from './components'
+export * from './Dialog'

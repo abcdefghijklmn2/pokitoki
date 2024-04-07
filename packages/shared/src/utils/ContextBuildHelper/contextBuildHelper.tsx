@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, ReactNode, useContext, useMemo } from 'react'
+import React, { createContext, ReactNode, useContext, useMemo } from 'react'
 
 export interface ContextBuildHelperParams<ContextValuesType extends object> {
   id: string

@@ -1,22 +1,28 @@
 import React, { Dispatch, FormEvent, ReactComponentElement, ReactElement, ReactNode, useState } from 'react'
-import { contextBuildHelper } from 'shared'
+import { contextBuildHelper, noop } from 'shared'
 
-import { Content, Overlay, Portal, Root, Trigger } from './radix'
+import { Close, Content, Overlay, Portal, Root, Trigger } from './radix'
 
-const [Provider, useDialogContext] = contextBuildHelper<{
-  open: boolean
-  setOpen: Dispatch<React.SetStateAction<boolean>>
+export const [DialogProvider, useDialogContext] = contextBuildHelper<{
+  isDialogVisible: boolean
+  onChangeVisibleStatus: (newVisibleStatus: boolean) => void
 }>({ id: 'dialog' })
 
-interface DialogProps {
-  children: ReactNode
+const DialogClose = () => {
+  return (
+    <Close asChild>
+      <button type="button" className="IconButton" aria-label="Close">
+        X
+      </button>
+    </Close>
+  )
 }
 
 const DialogRoot = ({ children }: { children: ReactNode }) => {
-  const { open, setOpen } = useDialogContext()
+  const { isDialogVisible, onChangeVisibleStatus } = useDialogContext()
 
   return (
-    <Root open={open} onOpenChange={setOpen}>
+    <Root open={isDialogVisible} onOpenChange={onChangeVisibleStatus}>
       {children}
     </Root>
   )
@@ -29,30 +35,35 @@ const DialogTrigger = ({ children }: { children: ReactNode }) => {
 const DialogContent = ({ children }: { children: ReactNode }) => {
   return (
     <Portal>
-      <Overlay />
-      <Content>{children}</Content>
+      <Overlay className="fixed inset-0" />
+      <Content className="fixed -translate-x-1/2 -translate-y-1/2 top-2/4 left-2/4">{children}</Content>
     </Portal>
   )
 }
 
-const SubmitForm = ({
-  className,
-  children,
-  onSubmit,
-}: {
-  className: string
+export interface SubmitFormProps {
   children: ReactNode
   onSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>
-}) => {
-  const { setOpen } = useDialogContext()
+  className?: string
+  onError?: (error: unknown) => void
+}
+
+const SubmitForm = ({ className, children, onSubmit, onError = noop }: SubmitFormProps) => {
+  const { onChangeVisibleStatus } = useDialogContext()
 
   const handleDialogSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    await onSubmit(event)
-    setOpen(false)
+    try {
+      await onSubmit(event)
+    } catch (error) {
+      onError(error)
+    } finally {
+      onChangeVisibleStatus(false)
+    }
   }
 
   return (
     <form
+      className={className}
       onSubmit={(event) => {
         event.preventDefault()
         handleDialogSubmit(event)
@@ -63,13 +74,31 @@ const SubmitForm = ({
   )
 }
 
-const Dialog = ({ children }: DialogProps) => {
+export interface DialogProps {
+  children: ReactNode
+
+  isVisible?: boolean
+  onChangeVisible?: (newVisibleStatus: boolean) => void
+}
+
+export const Dialog = ({ isVisible = undefined, onChangeVisible, children }: DialogProps) => {
   const [open, setOpen] = useState(false)
 
+  const isDialogVisible = isVisible ?? open
+  const handleChangeVisibleStatus = (newVisibleStatus: boolean) => {
+    if (onChangeVisible) {
+      onChangeVisible(newVisibleStatus)
+
+      return
+    }
+
+    setOpen(newVisibleStatus)
+  }
+
   return (
-    <Provider open={open} setOpen={setOpen}>
+    <DialogProvider isDialogVisible={isDialogVisible} onChangeVisibleStatus={handleChangeVisibleStatus}>
       {children}
-    </Provider>
+    </DialogProvider>
   )
 }
 
@@ -78,6 +107,5 @@ Dialog.displayName = 'Dialog'
 Dialog.Root = DialogRoot
 Dialog.Trigger = DialogTrigger
 Dialog.SubmitForm = SubmitForm
-Dialog.DialogContent = DialogContent
-
-export default Dialog
+Dialog.Content = DialogContent
+Dialog.Close = DialogClose
