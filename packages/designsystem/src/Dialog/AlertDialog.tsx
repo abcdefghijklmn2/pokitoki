@@ -32,9 +32,25 @@ const DialogBody = ({ className, children }: { className?: string; children: Rea
   return <div className={cn('flex w-full py-2 grow body-02-r', className)}>{children}</div>
 }
 
+/**
+ * Properties for the AlertDialog component.
+ *
+ * This interface extends `DialogTemplateProps` and `SubmitFormProps` by inheriting all their properties
+ * except for `children`, which is explicitly redefined here. It's designed to create alert dialogs
+ * that can optionally submit data, displaying a consistent interface while allowing for customization
+ * and functionality extension.
+ */
 export interface AlertDialogProps extends Omit<DialogTemplateProps, 'children'>, Omit<SubmitFormProps, 'children'> {
+  /**
+   * The header text to be displayed at the top of the alert dialog.
+   * This text is typically used to capture the user's attention with a short, concise title.
+   */
   header: string
 
+  /**
+   * The children nodes to be rendered within the body of the alert dialog. This can include messages,
+   * forms, or any other React nodes appropriate for the dialog's content.
+   */
   children: ReactNode
 }
 

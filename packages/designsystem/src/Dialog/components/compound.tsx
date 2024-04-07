@@ -41,10 +41,42 @@ const DialogContent = ({ children }: { children: ReactNode }) => {
   )
 }
 
+/**
+ * Properties for the SubmitForm component.
+ *
+ * This interface defines the props needed to handle form submission, including the children to be rendered within the form,
+ * a submission handler, optional custom styling, and an error handler.
+ */
 export interface SubmitFormProps {
+  /**
+   * The children nodes to be rendered within the form. This can include any form elements such as inputs, labels,
+   * and buttons, or other React nodes that form the content of the submission form.
+   */
   children: ReactNode
+
+  /**
+   * The event handler function that is called when the form is submitted.
+   *
+   * This function should be an asynchronous operation (returning a Promise) that handles the form submission logic,
+   * such as validating the form data and sending it to a server. The function receives the form event, allowing
+   * for custom handling like preventing the default form submission behavior.
+   *
+   * @param event - The form event triggered upon form submission.
+   */
   onSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>
+
+  /**
+   * An optional CSS class name to apply to the form for styling purposes. This allows for custom styling of the
+   * form element, making it possible to adapt the appearance of the form to match the rest of the application's design.
+   */
   className?: string
+
+  /**
+   * An optional error handler function that is called if an error occurs during form submission. This provides a way
+   * to handle submission errors, such as displaying error messages to the user or logging the error for debugging purposes.
+   *
+   * @param error - The error object or message encountered during the submission process.
+   */
   onError?: (error: unknown) => void
 }
 
@@ -74,10 +106,29 @@ const SubmitForm = ({ className, children, onSubmit, onError = noop }: SubmitFor
   )
 }
 
+/**
+ * Properties for the Dialog component.
+ */
 export interface DialogProps {
+  /**
+   * The children nodes to be rendered within the dialog. This can be any valid
+   * React Node (e.g., elements, strings, fragments, or an array of these types).
+   */
   children: ReactNode
 
+  /**
+   * A boolean indicating whether the dialog is currently visible.
+   * If not provided, the dialog visibility will be managed internally or by parent components.
+   * Defaults to `false` if not specified.
+   */
   isVisible?: boolean
+
+  /**
+   * An optional callback function that is called when the visibility of the dialog needs to change.
+   * This allows parent components to control the visibility state of the dialog.
+   *
+   * @param newVisibleStatus - The new visibility state (true for visible, false for hidden) that should be applied to the dialog.
+   */
   onChangeVisible?: (newVisibleStatus: boolean) => void
 }
 
