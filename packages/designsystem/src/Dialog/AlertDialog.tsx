@@ -4,8 +4,8 @@ import React, { ReactNode } from 'react'
 import { Button } from '../Button'
 import { cn } from '../utils'
 import { Dialog, SubmitFormProps, useDialogContext } from './components/compound'
-import { DialogTemplate, DialogTemplateProps } from './components/DialogTemplate'
 import { Title } from './components/radix'
+import { DialogTemplate, DialogTemplateProps } from './DialogTemplate'
 
 const SubmitForm = ({ onSubmit, onError }: Omit<SubmitFormProps, 'children'>) => {
   const { onChangeVisibleStatus } = useDialogContext()

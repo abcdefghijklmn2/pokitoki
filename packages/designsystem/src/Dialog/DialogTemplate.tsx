@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Dialog, DialogProps } from './compound'
+import { Dialog, DialogProps } from './components/compound'
 
 export interface DialogTemplateProps extends DialogProps {}
 
