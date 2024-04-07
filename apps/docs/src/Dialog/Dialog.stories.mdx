@@ -1,0 +1,38 @@
+import { ArgsTable, Title,  Controls, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Dialog } from '@custompackages/designsystem';
+
+<Meta title="Example/Dialog"
+      component={Dialog}
+      tags={['autodocs']} 
+      argTypes={{
+        
+      }}
+      args={{
+        variant: 'primary',
+        size : 'medium'
+      }}
+/>
+
+<Title />
+
+## 설치
+
+프로젝트에 @custompackages/designsystem이 설치되어 있는지 확인하세요. 
+
+다음과 같이 Dialog 컴포넌트를 임포트할 수 있습니다
+
+```jsx
+import { Dialog } from '@custompackages/designsystem';
+```
+
+## Basic Usage
+
+<Canvas>
+  <Story name="BasicDialog" args={{ children: 'text' }}>
+    {args => <Dialog {...args} />}
+  </Story>
+</Canvas>
+
+## Props
+
+<Controls />

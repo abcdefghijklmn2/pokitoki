@@ -4,7 +4,7 @@ import { createContext, ReactNode, useContext, useMemo } from 'react'
 export interface ContextBuildHelperParams<ContextValuesType extends object> {
   id: string
 
-  defaultContext: ContextValuesType | undefined
+  defaultContext?: ContextValuesType | undefined
 }
 
 type ProviderProps<ContextValuesType> = (ContextValuesType & { children: ReactNode }) | { children: ReactNode }
@@ -39,5 +39,7 @@ export const contextBuildHelper = <ContextValuesType extends object>({
     throw new Error(`${id} context must be provided in provider`)
   }
 
-  return [HelperProvider, useHelperContext]
+  HelperProvider.displayName = `${id}provider`
+
+  return [HelperProvider, useHelperContext] as const
 }
