@@ -8,6 +8,7 @@ const AssembledDialogExample = () => {
   return (
     <>
       <button
+        style={{ width: '70px', height: '70px', background: 'red', margin: '100px' }}
         type="button"
         onClick={() => {
           setVisible(true)

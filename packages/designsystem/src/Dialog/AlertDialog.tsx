@@ -54,9 +54,17 @@ export interface AlertDialogProps extends Omit<DialogTemplateProps, 'children'>,
   children: ReactNode
 }
 
-export const AlertDialog = ({ isVisible, onChangeVisible, header, onSubmit, children, onError }: AlertDialogProps) => {
+export const AlertDialog = ({
+  Trigger,
+  isVisible,
+  onChangeVisible,
+  header,
+  onSubmit,
+  children,
+  onError,
+}: AlertDialogProps) => {
   return (
-    <DialogTemplate isVisible={isVisible} onChangeVisible={onChangeVisible}>
+    <DialogTemplate isVisible={isVisible} onChangeVisible={onChangeVisible} Trigger={Trigger}>
       <div className="flex-col p-6 border-solid rounded-lg bg-surface-up border-1 border-border-01 w-80 shadow-card-01">
         <Title className="flex flex-row justify-between w-full mb-3 text-text-01 heading-04 ">
           {header}

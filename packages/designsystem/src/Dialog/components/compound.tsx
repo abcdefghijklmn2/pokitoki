@@ -29,7 +29,7 @@ const DialogRoot = ({ children }: { children: ReactNode }) => {
 }
 
 const DialogTrigger = ({ children }: { children: ReactNode }) => {
-  return <Trigger asChild>{children}</Trigger>
+  return <Trigger>{children}</Trigger>
 }
 
 const DialogContent = ({ children }: { children: ReactNode }) => {
