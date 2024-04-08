@@ -7,13 +7,18 @@ import { Dialog, SubmitFormProps, useDialogContext } from './components/compound
 import { Title } from './components/radix'
 import { DialogTemplate, DialogTemplateProps } from './DialogTemplate'
 
-const SubmitForm = ({ onSubmit, onError }: Omit<SubmitFormProps, 'children'>) => {
+interface DialogSubmitFormProps extends Omit<SubmitFormProps, 'children'> {
+  submitText: string
+  cancelText: string
+}
+
+const SubmitForm = ({ submitText, cancelText, onSubmit, onError }: DialogSubmitFormProps) => {
   const { onChangeVisibleStatus } = useDialogContext()
 
   return (
     <Dialog.SubmitForm className="flex flex-col w-full mt-2" onSubmit={onSubmit} onError={onError}>
       <Button className="w-full mb-2" type="submit" size="medium" variant="primary">
-        Primary
+        {submitText}
       </Button>
       <Button
         className="w-full"
@@ -22,9 +27,18 @@ const SubmitForm = ({ onSubmit, onError }: Omit<SubmitFormProps, 'children'>) =>
         size="medium"
         variant="secondary"
       >
-        Secondary
+        {cancelText}
       </Button>
     </Dialog.SubmitForm>
+  )
+}
+
+const DialogHeader = ({ children }: { children?: ReactNode }) => {
+  return (
+    <Title className="flex flex-row justify-between w-full mb-3 text-text-01 heading-04 ">
+      {children}
+      <Dialog.Close />
+    </Title>
   )
 }
 
@@ -40,13 +54,7 @@ const DialogBody = ({ className, children }: { className?: string; children: Rea
  * that can optionally submit data, displaying a consistent interface while allowing for customization
  * and functionality extension.
  */
-export interface AlertDialogProps extends Omit<DialogTemplateProps, 'children'>, Omit<SubmitFormProps, 'children'> {
-  /**
-   * The header text to be displayed at the top of the alert dialog.
-   * This text is typically used to capture the user's attention with a short, concise title.
-   */
-  header: string
-
+export interface AlertDialogProps extends Omit<DialogTemplateProps, 'children'> {
   /**
    * The children nodes to be rendered within the body of the alert dialog. This can include messages,
    * forms, or any other React nodes appropriate for the dialog's content.
@@ -54,31 +62,18 @@ export interface AlertDialogProps extends Omit<DialogTemplateProps, 'children'>,
   children: ReactNode
 }
 
-export const AlertDialog = ({
-  Trigger,
-  isVisible,
-  onChangeVisible,
-  header,
-  onSubmit,
-  children,
-  onError,
-}: AlertDialogProps) => {
+export const AlertDialog = ({ Trigger, isVisible, onChangeVisible, children }: AlertDialogProps) => {
   return (
     <DialogTemplate isVisible={isVisible} onChangeVisible={onChangeVisible} Trigger={Trigger}>
       <div className="flex-col p-6 border-solid rounded-lg bg-surface-up border-1 border-border-01 w-80 shadow-card-01">
-        <Title className="flex flex-row justify-between w-full mb-3 text-text-01 heading-04 ">
-          {header}
-          <Dialog.Close />
-        </Title>
-
         {children}
-
-        <SubmitForm onSubmit={onSubmit} onError={onError} />
       </div>
     </DialogTemplate>
   )
 }
 
+AlertDialog.Header = DialogHeader
 AlertDialog.Body = DialogBody
+AlertDialog.SubmitForm = SubmitForm
 
 AlertDialog.displayName = 'dialog'

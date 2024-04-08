@@ -9,14 +9,16 @@ const TriggerButton = () => {
   )
 }
 
-const AssembledDialogExample2 = () => {
+const AlertDialogExample2 = () => {
   return (
     <>
-      <AlertDialog Trigger={TriggerButton} header="example" onSubmit={async (e) => {}}>
+      <AlertDialog Trigger={TriggerButton}>
+        <AlertDialog.Header>Test</AlertDialog.Header>
         <AlertDialog.Body>Test Body</AlertDialog.Body>
+        <AlertDialog.SubmitForm submitText="확인" cancelText="취소" onSubmit={async (e) => {}} />
       </AlertDialog>
     </>
   )
 }
 
-export default AssembledDialogExample2
+export default AlertDialogExample2

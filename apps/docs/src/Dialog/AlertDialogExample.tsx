@@ -1,8 +1,7 @@
 import { AlertDialog } from '@custompackages/designsystem'
 import React, { useState } from 'react'
-import { noop } from 'shared'
 
-const AssembledDialogExample = () => {
+const AlertDialogExample = () => {
   const [isVisible, setVisible] = useState(false)
 
   return (
@@ -16,11 +15,14 @@ const AssembledDialogExample = () => {
       >
         click button !
       </button>
-      <AlertDialog isVisible={isVisible} onChangeVisible={setVisible} header="example" onSubmit={async (e) => {}}>
+      <AlertDialog isVisible={isVisible} onChangeVisible={setVisible}>
+        <AlertDialog.Header>Test</AlertDialog.Header>
         <AlertDialog.Body>Test Body</AlertDialog.Body>
+
+        <AlertDialog.SubmitForm submitText="확인" cancelText="취소" onSubmit={async (e) => {}} />
       </AlertDialog>
     </>
   )
 }
 
-export default AssembledDialogExample
+export default AlertDialogExample
