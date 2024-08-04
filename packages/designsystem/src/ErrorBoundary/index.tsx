@@ -1,6 +1,10 @@
 import ErrorBoundary from './ErrorBoundary'
 import WithErrorBoundary from './WithErrorBoundary'
+import WithErrorSuspense from './WithErrorSuspense'
 
 export * from './BaseErrorBoundary'
+export * from './ErrorGroupProvider'
 export * from './hooks'
-export { ErrorBoundary, WithErrorBoundary }
+export * from './WithErrorSuspense'
+
+export { ErrorBoundary, WithErrorBoundary, WithErrorSuspense }

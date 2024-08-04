@@ -1,12 +1,14 @@
 'use client'
 
+import { compareArrays } from '@custompackages/shared'
 /* eslint-disable react/no-unused-class-component-methods */
-import { Component, ErrorInfo, PropsWithChildren, PropsWithRef, ReactNode } from 'react'
+import { Component, createElement, ErrorInfo, PropsWithChildren, PropsWithRef, ReactNode } from 'react'
 
 export type RenderFallbackProps<ErrorType extends Error = Error> = {
   error: ErrorType
   reset: () => void
 }
+
 export type IgnoreErrorType = <ErrorType extends Error = Error>(error: ErrorType) => boolean
 export type RenderFallbackType = <ErrorType extends Error>(
   props: RenderFallbackProps<ErrorType>,
@@ -24,6 +26,8 @@ export type ErrorBoundaryProps<ErrorType extends Error = Error> = {
   ignoreError?: IgnoreErrorType
 
   children: ReactNode
+
+  deps?: unknown[]
 }
 
 const initialState: State = {
@@ -42,26 +46,21 @@ export class BaseErrorBoundary extends Component<PropsWithRef<PropsWithChildren<
   }
 
   static getDerivedStateFromError(error: Error) {
+    // sentry에 에러를 보내는 로직 작성
     return { error }
   }
 
   componentDidUpdate(prevProps: ErrorBoundaryProps) {
     const { error } = this.state
+    const { deps } = this.props
 
-    /* 
-    if (error == null) {
+    if (!compareArrays(deps as unknown[], prevProps.deps as unknown[])) {
+      this.resetState()
     }
-   
-    if (!this.updatedWithError) {
-      this.updatedWithError = true
-    }
-
-    추가동작..
-    */
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    const { onError, ignoreError } = this.props
+    const { onError, ignoreError, deps } = this.props
 
     if (ignoreError?.(error)) {
       throw error

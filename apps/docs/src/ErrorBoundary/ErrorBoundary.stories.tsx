@@ -1,10 +1,14 @@
-import { ErrorBoundary, ErrorSuspense, RenderFallbackProps, useErrorBoundary } from '@custompackages/designsystem'
+import {
+  ErrorBoundary,
+  ErrorGroupBoundaryProvider,
+  useErrorBoundary,
+  useErrorGroupBoundaryContext,
+} from '@custompackages/designsystem'
 import type { Meta, StoryObj } from '@storybook/react'
-import { ReactNode } from 'react'
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof ErrorBoundary> = {
-  title: 'PokiToki/Navigation',
+  title: 'example/ErrorBoundary',
   component: ErrorBoundary,
   argTypes: {},
   tags: ['autodocs'],
@@ -13,7 +17,7 @@ const meta: Meta<typeof ErrorBoundary> = {
 export default meta
 
 const ErrorExample = () => {
-  const setError = useErrorBoundary()
+  const { setError } = useErrorBoundary()
 
   return (
     <button
@@ -27,7 +31,9 @@ const ErrorExample = () => {
   )
 }
 
-const Fallback = () => <div>error!</div>
+const Fallback = ({ reset }: any) => {
+  return <div onClick={reset}>error! reset to click this div</div>
+}
 
 export const ErrorBoundaryExample = () => {
   return (
@@ -37,10 +43,28 @@ export const ErrorBoundaryExample = () => {
   )
 }
 
-export const ErrorSuspenseExample = () => {
+const RefreshTrigger = () => {
+  const { refreshTrigger } = useErrorGroupBoundaryContext()
+
   return (
-    <ErrorSuspense ErrorFallback={Fallback} LoadingFallback={<Fallback />}>
-      <ErrorExample />
-    </ErrorSuspense>
+    <div>
+      <button type="button" onClick={refreshTrigger}>
+        refresh
+      </button>
+    </div>
+  )
+}
+
+export const ErrorGroupProviderExample = () => {
+  return (
+    <ErrorGroupBoundaryProvider>
+      <RefreshTrigger />
+      <ErrorBoundary fallback={Fallback}>
+        <ErrorExample />
+      </ErrorBoundary>
+      <ErrorBoundary fallback={Fallback}>
+        <ErrorExample />
+      </ErrorBoundary>
+    </ErrorGroupBoundaryProvider>
   )
 }
